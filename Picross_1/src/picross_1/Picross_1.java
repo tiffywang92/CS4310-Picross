@@ -34,7 +34,8 @@ public class Picross_1 {
                     System.out.print('O');
                 else
                     System.out.print('_');
-        }
+            }
         System.out.println('|');
+        }
     }
 }

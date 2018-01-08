@@ -15,10 +15,21 @@ public class Picross_1 {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        int[][] grid = new int[4][4];
-        grid[0][0]= 1;
-        drawGrid(grid);
+        int[][] userGrid = new int[4][4];
+        int [][] pcGrid = new int [4][4];
+        createGrid (pcGrid);
+        drawGrid(pcGrid);
         System.out.println("Sample");
+        
+    }
+
+    public static int [][] createGrid(int [][] grid) {
+    	Random r = new Random(); 
+    	for (int y = 0 ; y < 4 ; y++)
+    		for ( int x = 0 ; x < 4 ; x++)
+    			if (r.nextBoolean())
+    				grid[x][y] = 1;
+    	return grid;
     }
 
     public static void drawGrid(int grid[][]) {

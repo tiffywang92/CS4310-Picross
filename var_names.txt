@@ -1,0 +1,26 @@
+Global variables
+
+
+bool[][] solGrid;
+bool[][] userGrid;
+int[][] trueX;
+int[][] trueY;
+
+// more may be added as necessary
+
+
+
+Functions/methods
+
+
+void createSolution(); // initializes solGrid, trueX, trueY
+
+void drawUserGrid(char x, char y); // initializes userGrid & formats hints
+
+void checkAnswer(); // prompts user input, fills userGrid,
+		    // compares with solGrid & prints result
+		    // if incorrect, state "incorrect" & print out solGrid
+
+void printGrid();
+// it may be easier to reuse this function for any print-out option,
+// rather than repeat code between the other functions

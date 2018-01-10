@@ -16,15 +16,20 @@ public class Picross_1 {
     
     public static void main(String[] args) {
 	int num = 1; // counter for games
-	boolean ended = false; // depends on user input, loads a new game to play again
+	boolean checked = false; // depends on user input
+	    char repeat; // holds user input to restart game
 	    
     	//grid first = new grid();
     	//first.setGrid(createGrid());
-    	while (!ended) {
+    	while (!checked) {
     	    createSol();
 	    System.out.println("Puzzle " + num++ + "\n");
     	    drawGrid();
-	    //ended = checkAnswer(); // accepts input to play again
+	    checked = scoring(); // sets the checked flag, depending on whether the user gets correct solution
+		if (!checked) { // if not correct
+			System.out.println("Given solution is incorrect. Try again? (y/n)");
+			// 
+		}
 	}
         //userGrid[0][1]= 1;
         //createGrid (pcGrid);
@@ -138,5 +143,29 @@ public class Picross_1 {
 		}
 		
 	}
+
+	public static boolean scoring(boolean[][]solGrid, boolean[][]userGrid){
+        boolean correct = true;  //correct flag
+        
+        for (int i = 0; i<solGrid.length; i++){
+            for (int j = 0; j<solGrid[i].length; j++){
+                if(solGrid[i][j] != userGrid[i][j]){
+                correct = false;
+            
+                }
+        
+            }
+        
+        }
+        
+         if(correct){
+            System.out.println("correct!");
+            return correct;
+         }
+        else{
+         System.out.println("incorrect!");
+         //print user Grid and solution Grid
+            return correct;
+        }
 
 }

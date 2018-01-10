@@ -33,10 +33,7 @@ public class Picross_1 {
         System.out.println("Sample");   
     }
 
-    static boolean [][]solGrid = new boolean[4][4];
-    static int [][] trueX  = new int [4][2];
-    static int [][] trueY = new int [4][2];
-    
+
 	/*Create and initialize the solution grid randomly, also calculate the random grid hint and store in trueX and trueY*/
     public static void createSol() {
     	

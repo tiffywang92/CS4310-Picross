@@ -16,16 +16,16 @@ public class scorer {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-       int[][] solGrid = {{2,3},{4,3}};
-       int[][] userGrid = {{2,1},{4,3}};
+       boolean[][] solGrid = {{true,true},{false,false}};
+       boolean[][] userGrid = {{true,true},{false,true}};
       
           //call scoring
         scoring(solGrid,userGrid);
     }
     
     
-    public static void scoring(int[][]solGrid, int[][]userGrid){
-        boolean correct = true;
+    public static boolean scoring(boolean[][]solGrid, boolean[][]userGrid){
+        boolean correct = true;  //correct flag
         
         for (int i = 0; i<solGrid.length; i++){
             for (int j = 0; j<solGrid[i].length; j++){
@@ -41,10 +41,12 @@ public class scorer {
         
          if(correct){
             System.out.println("correct!");
+            return correct;
          }
         else{
          System.out.println("incorrect!");
          //print user Grid and solution Grid
+            return correct;
         }
     
 }

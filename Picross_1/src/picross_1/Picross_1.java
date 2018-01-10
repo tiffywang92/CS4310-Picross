@@ -39,7 +39,8 @@ public class Picross_1 {/*
     }
 
 
-	/*Create and initialize the solution grid randomly, also calculate the random grid hint and store in trueX and trueY*/
+/*Create and initialize the solution grid randomly, also calculate the random grid hint and store in trueX and trueY*/
+/* Author Sai Tam */
     public static void createSol() {
     	
     	Random r = new Random(); 

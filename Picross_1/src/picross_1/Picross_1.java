@@ -12,7 +12,12 @@ import java.util.Random;
  *
  * @author Tiffany
  */
-public class Picross_1 {
+public class Picross_1 {/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
 
     static boolean [][]solGrid = new boolean[4][4];
     static boolean[][] userGrid = new boolean[4][4];
@@ -25,7 +30,7 @@ public class Picross_1 {
     	//grid first = new grid();
     	//first.setGrid(createGrid());
     	createSol();
-    	drawGrid();
+    	//drawGrid();
     	
         //userGrid[0][1]= 1;
         //createGrid (pcGrid);
@@ -74,7 +79,7 @@ public class Picross_1 {
     
  
     /* drawGrid: prints out solution grid */
-}
+
 
 /** Insert another method here to generate user grid + number clues
 *   And maybe another to print it all out

@@ -15,6 +15,7 @@ import java.util.Random;
 public class Picross_1 {
 
     static boolean [][]solGrid = new boolean[4][4];
+    static boolean[][] userGrid = new boolean[4][4];
     static int [][] trueX  = new int [4][2];
     static int [][] trueY = new int [4][2];
     /**
@@ -83,4 +84,71 @@ public class Picross_1 {
 * 
 *   - Tiffany
 */
+
+/**
+	 * Prints out the solution board without hints to standard output.
+	 * -Anthony S.
+	 */
+	static void drawSolutionBoard() {
+		System.out.println();
+		System.out.println("***Solution***");
+		for(int x = 0; x < 4; x++) {
+			for(int y = 0; y < 4; y++) {
+				System.out.print(" ");
+				if(solGrid[x][y]) {
+					System.out.print("0");
+				} else {
+					System.out.print("-");
+				}
+				System.out.print(" ");
+			}
+			System.out.println();
+		}
+		
+	}
+
+/**
+	 * Prints out the user board with hints to standard output.
+	 * -Anthony S.
+	 */
+	static void drawUserBoard() {
+		System.out.println();
+		System.out.println("***Game Board***");
+		
+		//Print out column hints 
+		for(int x = 3; x > -1; x--) {
+			System.out.print((x+1) + ") ");
+			if(trueY[x][1] == 0) {
+				System.out.println(trueY[x][0]);
+			}else {
+				System.out.println(trueY[x][0] + ", " + trueY[x][1]);
+			}
+		}
+		System.out.println();
+		for(int x = 1; x < 5; x++) {
+			System.out.print(" " + x + " ");
+		}
+		
+		//Print out the rest
+		System.out.println();
+		for(int x = 0; x < 4; x++) {
+			for(int y = 0; y < 4; y++) {
+				System.out.print(" ");
+				if(userGrid[x][y]) {
+					System.out.print("0");
+				} else {
+					System.out.print("-");
+				}
+				System.out.print(" ");
+			}
+			if(trueX[x][1] == 0) {
+				System.out.println("\t=> " + trueX[x][0]);
+			}else {
+				System.out.println("\t=> " + trueX[x][0] + ", " + trueX[x][1]);
+			}
+		}
+		
+	}
+
+
 }

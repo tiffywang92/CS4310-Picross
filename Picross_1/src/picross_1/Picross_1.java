@@ -156,29 +156,33 @@ public class Picross_1 {
         int num = 1; // counter for games
         char item; // holds user input to fill board
 	
-    	while (repeat != 'q') {
-    	    createSol();
-	    System.out.println("Game #" + num++);
-            drawUserBoard();
-            System.out.println();
-            System.out.println("Enter your answer with o or x; o as filled and x as not.");
-            for (int i = 0; i < 4; i++) {
-                System.out.print("Row " + (i+1) + ": ");
-                for (int j = 0; j < 4; j++) {
-                    item = (char) cin.read();
-                    cin.read();
-                    if (item == 'o')
-                        userGrid[i][j] = true;
+    	try {
+            while (repeat != 'q') {
+                createSol();
+                System.out.println("Game #" + num++);
+                drawUserBoard();
+                System.out.println();
+                System.out.println("Enter your answer with o or x; o as filled and x as not.");
+                for (int i = 0; i < 4; i++) {
+                    System.out.print("Row " + (i+1) + ": ");
+                    for (int j = 0; j < 4; j++) {
+                        item = (char) cin.read();
+                        cin.read();
+                        if (item == 'o')
+                            userGrid[i][j] = true;
+                    }
                 }
+                System.out.println();
+                valid = scoring(solGrid, userGrid);
+                if (!valid) // if not correct
+                    drawSolutionBoard();
+                System.out.println();
+                System.out.println("Play again? (Press q to quit)");
+                repeat = (char) cin.read();
+                System.out.println();
             }
-    	    System.out.println();
-	    valid = scoring(solGrid, userGrid);
-            if (!valid) // if not correct
-                drawSolutionBoard();
-            System.out.println();
-            System.out.println("Play again? (Press q to quit)");
-            repeat = (char) cin.read();
-            System.out.println();
+        } finally {
+            cin.close();
         }
     }
 }

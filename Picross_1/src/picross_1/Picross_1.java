@@ -172,6 +172,7 @@ public class Picross_1 {
                 drawUserBoard();
                 System.out.println();
                 System.out.println("Enter your answer with o or x; o as filled and x as not.");
+		System.out.println("Separate by space, but leave out spaces at end of line.");
                 for (int i = 0; i < 4; i++) {
                     System.out.print("Row " + (i+1) + ": ");
                     for (int j = 0; j < 4; j++) {

@@ -17,12 +17,21 @@ public class Picross_1 {
     static int [][] trueY = new int [4][2];
 
     /*Create and initialize the solution grid randomly, also calculate the random grid hint and store in trueX and trueY*/
+    /* Author Sai Tam */
     public static void createSol() {
     	
+	// Create randomnized grid
     	Random r = new Random(); 
     	for (int y = 0 ; y < 4 ; y++)
     		for ( int x = 0 ; x < 4 ; x++) 
     			solGrid[x][y] = r.nextBoolean();
+	    
+	// Reset hint grid to 0
+	for (int y = 0 ; y < 4 ; y++)
+    		for ( int x = 0 ; x < 2 ; x++) {
+    			trueX[y][x] = 0;
+    			trueY[y][x] = 0;
+    		}
     	
     	//Compute x-axis hint
     	int tempCount = 0;

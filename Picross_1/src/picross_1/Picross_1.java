@@ -86,7 +86,14 @@ public class Picross_1 {
 	static void drawSolutionBoard() {
 		System.out.println();
 		System.out.println("***Solution***");
+		System.out.print("  ");
+		for(int x = 1; x < 5; x++) {
+			System.out.print(" " + x + " ");
+		}
+		System.out.println();
+		char[] letters = {'A', 'B', 'C', 'D'};
 		for(int x = 0; x < 4; x++) {
+			System.out.print(letters[x] + " ");
 			for(int y = 0; y < 4; y++) {
 				System.out.print(" ");
 				if(solGrid[x][y]) {
@@ -119,13 +126,16 @@ public class Picross_1 {
 			}
 		}
 		System.out.println();
+		System.out.print("  ");
 		for(int x = 1; x < 5; x++) {
 			System.out.print(" " + x + " ");
 		}
+		char[] letters = {'A', 'B', 'C', 'D'};
 		
 		//Print out the rest
 		System.out.println();
 		for(int x = 0; x < 4; x++) {
+			System.out.print(letters[x] + " ");
 			for(int y = 0; y < 4; y++) {
 				System.out.print(" ");
 				if(userGrid[x][y]) {

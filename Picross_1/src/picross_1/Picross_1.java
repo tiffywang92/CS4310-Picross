@@ -26,6 +26,12 @@ public class Picross_1 {
     		for ( int x = 0 ; x < 4 ; x++) 
     			solGrid[x][y] = r.nextBoolean();
 	    
+	
+	//  Reset User Grid
+    	for (int y = 0 ; y < 4 ; y++)
+    		for ( int x = 0 ; x < 4 ; x++) 
+    			userGrid[x][y] = false;   
+	    
 	// Reset hint grid to 0
 	for (int y = 0 ; y < 4 ; y++)
     		for ( int x = 0 ; x < 2 ; x++) {

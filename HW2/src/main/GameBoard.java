@@ -17,7 +17,7 @@ public class GameBoard {
 				return gBoard[x][y];
 			}
 		}
-		return -1;
+		return ' ';
 	}
 	
 	public void setSquare(int x, int y, char value) {

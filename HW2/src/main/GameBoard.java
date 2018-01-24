@@ -11,9 +11,9 @@ public class GameBoard {
 		this.size = size;
 	}
 	
-	public Integer getBoardValue(int x, int y) {
-		if(x != null) {
-			if(y != null) {
+	public char getBoardValue(int x, int y) {
+		if(x < size && x >= 0) {
+			if(y < size && y >= 0) {
 				return gBoard[x][y];
 			}
 		}

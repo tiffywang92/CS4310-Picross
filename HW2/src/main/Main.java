@@ -42,13 +42,15 @@ public class Main {
 	}
 	
 	static void runPicross() {
-		PicrossModel picModel = new PicrossModel(howLarge());
-		PicrossView picView = new PicrossView(picModel);
-		PicrossController picCon = new PicrossController(picModel, picView);
+		//PicrossModel picModel = new PicrossModel(howLarge());
+		//PicrossView picView = new PicrossView(picModel);
+		//PicrossController picCon = new PicrossController(picModel, picView);
 	}
 	
 	static void runConn4() {
-		
+		Conn4Model conModel = new Conn4Model(howLarge());
+		Conn4View conView = new Conn4View(conModel);
+		Conn4Controller conCon = new Conn4Controller(conModel, conView);
 	}
 	
 	static int howLarge() {
@@ -58,7 +60,7 @@ public class Main {
 		Scanner in = new Scanner(System.in);
 		
 		while(!corrInput) {
-			System.out.println("How large should grid be:  ");
+			System.out.print("How large should grid be:  ");
 			temp = in.nextLine();
 			try {
 				toReturn = Integer.parseInt(temp);
@@ -69,7 +71,9 @@ public class Main {
 			
 		}
 		System.out.println("\n");
+		in.close();
 		return toReturn;
+		
 	}
 
 }

@@ -6,7 +6,7 @@ public class GameBoard {
 	private int size;
 	
 	
-	public void GameBoard(int size) {
+	public  GameBoard(int size) {
 		gBoard = new char[size][size];
 		this.size = size;
 	}
@@ -26,6 +26,9 @@ public class GameBoard {
 				gBoard[x][y] = value;
 			}
 		}
+	}
+	public int getSize() {
+		return size;
 	}
 
 }

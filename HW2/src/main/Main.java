@@ -71,7 +71,6 @@ public class Main {
 			
 		}
 		System.out.println("\n");
-		in.close();
 		return toReturn;
 		
 	}

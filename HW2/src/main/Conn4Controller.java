@@ -10,7 +10,7 @@ public class Conn4Controller {
 	
 	private Conn4Model conModel;
 	private Conn4View conView;
-	Scanner in = new Scanner(System.in);
+	Scanner read = new Scanner(System.in);
 	String input = "";
 	
 	/**
@@ -30,27 +30,29 @@ public class Conn4Controller {
 	private void mainGameLoop() {
 		char turn = ' ';
 		int k = 1;
-		boolean repeat = false;
+		boolean repeat = true;
 		do  {
 			if ( (k%2) ==1) turn = 'X';
 			else turn = 'O';
-			conView.printBoard();
-			conView.printPrompt(turn);
-			do {
-				repeat = false;
+				conView.printBoard();
+				conView.printPrompt(turn);
 				getInput();
-				if (!conModel.setSquare(getX(), getY(), turn)) {
+				if (getY() == -16) {
+					repeat = false;
+					break;
+				}
+				else if (!conModel.setSquare(getX(), getY(), turn)) {
 					System.out.println("Invalid Entry, try again: ");
 					repeat =true;
 					}
-				else if (getX() ==81)
-					break;
-			}while (repeat == true);
-			conView.printBoard();	
+				if (conModel.checkSolution(conModel.getSize())) {
+					System.out.println();
+					System.out.println(turn + " WINS!");
+					repeat = false;
+				}
 			k++;
-		} while (!conModel.checkSolution(conModel.getSize()));	
-		System.out.println();
-		System.out.println(turn + " WINS!");
+		} while (repeat == true);	
+		System.out.println("Game Ended.");
 	}
 	
 	
@@ -60,10 +62,7 @@ public class Conn4Controller {
 	 */
 	//read in user input
 	public void getInput() {
-		char  [] convertAlpha  = new char [26];
-		for (int i = 0; i < 26; i++)
-			convertAlpha [i]= (char) (i+97);
-		input  = in.nextLine();
+		input  = read.nextLine();
 	}
 	
 	//extract y coordinate

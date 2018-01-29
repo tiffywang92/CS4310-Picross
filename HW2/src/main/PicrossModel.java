@@ -2,6 +2,7 @@ package main;
 
 import java.util.ArrayList;
 import java.util.Random;
+import GameBoard.java;
 
 /**
  * The Model component manages the system data and associated operations on that data.

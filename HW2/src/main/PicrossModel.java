@@ -16,6 +16,8 @@ public class PicrossModel {
 	private GameBoard userB;
 	private ArrayList<ArrayList<Integer>> trueX;
 	private ArrayList<ArrayList<Integer>> trueY;
+	public boolean correct = false; // Set this flag to true if given solution is correct
+					// made public for View to access
 	
 	/**
 	 * Creates a random game board and stores it in solutionB.
@@ -31,13 +33,17 @@ public class PicrossModel {
 		// Create randomnized grid
 		Random r = new Random(); 
 		for (int y = 0 ; y < gameSize ; y++)
-			for ( int x = 0 ; x < gameSize ; x++) 
-				solutionB[x][y] = r.nextInt(2);
+			for ( int x = 0 ; x < gameSize ; x++) {
+				if (r.nextInt(2) == 1)
+					solutionB[x][y] = 'o';
+				else
+					solutionB[x][y] = ' ';
+			}
 
 		//  Reset User Grid
 		for (int y = 0 ; y < gameSize ; y++)
 			for ( int x = 0 ; x < gameSize ; x++) 
-				userB[x][y] = 0;   
+				userB[x][y] = ' ';   
 	}
 	
 	/**
@@ -50,11 +56,11 @@ public class PicrossModel {
 		
 		// Reset hint grid to 0
 		for (int y = 0 ; y < gameSize ; y++)
-			if (gameSize % 2 == 0)
+			if (gameSize % 2 == 0)		//If size is even
 				for ( int x = 0 ; x < gameSize / 2 ; x++) {
 					trueX[y][x] = 0;
 					trueY[y][x] = 0;
-			else
+			else				//If size is odd
 				for ( int x = 0 ; x < gameSize / 2 + 1 ; x++) {
 					trueX[y][x] = 0;
 					trueY[y][x] = 0;
@@ -68,10 +74,10 @@ public class PicrossModel {
 			if (solutionB[y][x] == 1)
 			    trueX[y][tempCount] ++;		//Found box true, up the hint count
 			else if (trueX[y][0] !=0 && solutionB[y][x] == 0)
-			tempCount  = 1; 	// Found box false and previous is not true, move to 2nd element
+			    tempCount  = 1; 	// Found box false and previous is not true, move to 2nd element
 			else;  //box false, do nothing
 		    }
-		    tempCount = 0;   
+		    tempCount = 0;
 		}	
 
 		tempCount = 0;  //reset count for picking up y-axis hint
@@ -94,14 +100,10 @@ public class PicrossModel {
 	 * @param gameSize - the size to make the 2d square game board
 	 */
 	public PicrossModel(Integer gameSize) {
-		// Should setSquareUserBoard be used to determine gameSize?
 		generateSolution(gameSize);	// Load solution grid
 		generateTrueXY(gameSize);	// Load hint grid
-		// What is the purpose of getHints if generateTrueXY will load them automatically?
-		if (!isCorrect) {
-			// draw the user board
-			// Do we leave this here or to the View instead?
-		}
+		if (!isCorrect)
+			correct = true;		// Set correct flag to be 'pulled' by PicrossView.java
 	}
 	
 	/**
@@ -120,7 +122,7 @@ public class PicrossModel {
 	 * @return
 	 */
 	public ArrayList<ArrayList<Integer>> getHints(Integer xOrY){
-		//Note currently does not return a copy so over writing may occur
+		//Given that trueX and trueY have been initialized, return the respective array
 		if(xOrY == 0) {
 			return trueX;
 		}else {

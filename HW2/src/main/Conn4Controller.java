@@ -44,11 +44,13 @@ public class Conn4Controller {
 				else if (!conModel.setSquare(getX(), getY(), turn)) {
 					System.out.println("Invalid Entry, try again: ");
 					repeat =true;
+					k--;
 					}
 				if (conModel.checkSolution(conModel.getSize())) {
 					System.out.println();
 					System.out.println(turn + " WINS!");
 					repeat = false;
+					conView.printBoard();
 				}
 			k++;
 		} while (repeat == true);	

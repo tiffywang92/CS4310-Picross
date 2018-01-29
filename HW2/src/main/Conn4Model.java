@@ -105,6 +105,8 @@ public class Conn4Model {
 		return true;
 	}
 	
+	//public void setBoard ()
+	
 	public char getSquare(Integer x, Integer y) {
 		return userB.getBoardValue(x, y);
 	}

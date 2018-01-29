@@ -41,54 +41,6 @@ public class Conn4View {
 	
 
 
-	
-		
-
-	
-	/**
-	 * Prints out the solution board without hints to standard output.
-	 */
-
-	
-	/**
-	 * Prints out the various options for the user.
-	 * Check if correct, input data, give up
-	 */
-	public void displayOptions() {
-		
-	}
-	
-	/**
-	 * Prints out how to input coordinates.
-	 */
-	public void displayInputData() {
-		
-	}
-
-	/**
-	 * Displays a victory message.
-	 */
-	public void displayVictory() {
-		
-	}
-	
-	/**
-	 * Shames the player then displays the solution
-	 */
-	public void displayGiveUp() {
-		
-	}
-	
-	/**
-	 * Tells the player their guess was incorrect and encourages them to keep trying
-	 */
-	public void displayIncorrect() {
-		
-	}
-	
-	public void displayText(String toDisp) {
-		System.out.println(toDisp);
-	}
 }
 
 

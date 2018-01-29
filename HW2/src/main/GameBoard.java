@@ -27,8 +27,12 @@ public class GameBoard {
 			}
 		}
 	}
+	
 	public int getSize() {
 		return size;
 	}
 
+	public void setGameBoard(char[][] gBoard_) {
+		this.gBoard = gBoard;
+	}
 }

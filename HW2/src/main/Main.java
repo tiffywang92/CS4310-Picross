@@ -32,7 +32,6 @@ public class Main {
 				break;
 			case '3':
 				quitGame = true;
-				in.close();
 				System.out.println("Thanks for playing");
 				break;
 			default:

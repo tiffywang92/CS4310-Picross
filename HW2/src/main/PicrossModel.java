@@ -143,12 +143,7 @@ public class PicrossModel {
 		    }
 		}
 
-		if(correct)
-		    return correct;
-		else
-		    return correct;
-		
-		return false;
+		return correct;
 	}
 	
 }

@@ -26,38 +26,38 @@ public class PicrossView {
 		System.out.println("***Game Board***");
 
 		//Print out column hints 
-		for(int x = 3; x > -1; x--) {
+		for(int x = picModel.getUserGrid().getSize(); x > 0; x--) {
 		    System.out.print((x+1) + ") ");
-		    if(trueY[x][1] == 0) {
-			System.out.println(trueY[x][0]);
+		    if(picModel.getHints(1)[x][1] == 0) {
+			System.out.println(picModel.getHints(1)[x][0]);
 		    }else {
-			System.out.println(trueY[x][0] + ", " + trueY[x][1]);
+			System.out.println(picModel.getHints(1)[x][0] + ", " + picModel.getHints(1)[x][1]);
 		    }
 		}
 		System.out.println();
 		System.out.print("  ");
-		for(int x = 1; x < 5; x++) {
+		for(int x = 0; x < picModel.getUserGrid().getSize(); x++) {
 		    System.out.print(" " + x + " ");
 		}
 		char[] letters = {'A', 'B', 'C', 'D'};
 
 		//Print out the rest
 		System.out.println();
-		for(int x = 0; x < 4; x++) {
+		for(int x = 0; x < picModel.getUserGrid().getSize(); x++) {
 		    System.out.print(letters[x] + " ");
-		    for(int y = 0; y < 4; y++) {
+		    for(int y = 0; y < picModel.getUserGrid().getSize(); y++) {
 			System.out.print(" ");
-			if(userGrid[x][y]) {
+			if(picModel.getUserGrid()[x][y]) {
 			    System.out.print("0");
 			} else {
 			    System.out.print("-");
 			}
 			System.out.print(" ");
 		    }
-		    if(trueX[x][1] == 0) {
-			System.out.println("\t=> " + trueX[x][0]);
+		    if(picModel.getHints(0)[x][1] == 0) {
+			System.out.println("\t=> " + picModel.getHints(0)[x][0]);
 		    }else {
-			System.out.println("\t=> " + trueX[x][0] + ", " + trueX[x][1]);
+			System.out.println("\t=> " + picModel.getHints(0)[x][0] + ", " + picModel.getHints(0)[x][1]);
 		    }
 		}
 	}
@@ -69,16 +69,16 @@ public class PicrossView {
 		System.out.println();
 		System.out.println("***Solution***");
 		System.out.print("  ");
-		for(int x = 1; x < 5; x++) {
+		for(int x = 0; x < picModel.getUserGrid().getSize(); x++) {
 		    System.out.print(" " + x + " ");
 		}
 		System.out.println();
 		char[] letters = {'A', 'B', 'C', 'D'};
-		for(int x = 0; x < 4; x++) {
+		for(int x = 0; x < picModel.getUserGrid().getSize(); x++) {
 		    System.out.print(letters[x] + " ");
-		    for(int y = 0; y < 4; y++) {
+		    for(int y = 0; y < picModel.getUserGrid().getSize(); y++) {
 			System.out.print(" ");
-			if(solGrid[x][y]) {
+			if(picModel.getSolution()[x][y]) {
 			    System.out.print("0");
 			} else {
 			    System.out.print("-");

@@ -16,8 +16,6 @@ public class PicrossModel {
 	private GameBoard userB;
 	private ArrayList<ArrayList<Integer>> trueX;
 	private ArrayList<ArrayList<Integer>> trueY;
-	public boolean correct = false; // Set this flag to true if given solution is correct
-					// made public for View to access
 	
 	/**
 	 * Creates a random game board and stores it in solutionB.
@@ -145,15 +143,10 @@ public class PicrossModel {
 		    }
 		}
 
-		if(correct){
-		    System.out.println("Correct!");
+		if(correct)
 		    return correct;
-		}
-		else{
-		    System.out.println("Incorrect!");
-		    //print user Grid and solution Grid
+		else
 		    return correct;
-		}
 		
 		return false;
 	}

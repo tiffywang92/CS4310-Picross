@@ -129,6 +129,22 @@ public class PicrossModel {
 	}
 	
 	/**
+	 * Returns a copy of the solution grid.
+	 * @return
+	 */
+	public GameBoard getSolution() {
+		return solutionB;
+	}
+	
+	/**
+	 * Returns a copy of the user grid.
+	 * @return
+	 */
+	public GameBoard getUserGrid() {
+		return userB;
+	}
+	
+	/**
 	 * Checks and compares the solution to the current user board.
 	 * @return - true if the user's board matches the solution, false otherwise.
 	 */

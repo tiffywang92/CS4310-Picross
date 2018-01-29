@@ -103,6 +103,7 @@ public class PicrossView {
 		System.out.println();
 		System.out.print("Enter your choice: ");
 		// Follow with getting user input
+		takeOptionsInput();
 	}
 	
 	/**

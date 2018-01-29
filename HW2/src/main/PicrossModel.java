@@ -32,7 +32,7 @@ public class PicrossModel {
 		Random r = new Random(); 
 		for (int y = 0 ; y < gameSize ; y++)
 			for ( int x = 0 ; x < gameSize ; x++) 
-				solutionB[x][y] = r.nextInteger();
+				solutionB[x][y] = r.nextInt(2);
 
 		//  Reset User Grid
 		for (int y = 0 ; y < gameSize ; y++)

@@ -18,10 +18,10 @@ public class PicrossController {
 	 * @param currentModel
 	 * @param currentView
 	 */
-	public PicrossController(PicrossModel currentModel, PicrossView currentView) {
+	public PicrossController(PicrossModel currentModel, PicrossView currentView, Scanner in) {
 		picModel = currentModel;
 		picView = currentView;
-		
+		this.in = in;
 		mainGameLoop();
 	}
 	
@@ -29,14 +29,56 @@ public class PicrossController {
 	 * Main game loop, uses view to print out current user game board and the options.
 	 */
 	private void mainGameLoop() {
+		picView.displayText("Welcome to Picross");
+		boolean endGame = false;
+		while(!endGame) {
+			picView.renderPlayBoard();
+			picView.displayOptions();
+			endGame = takeOptionsInput();
+		}
+		
 		
 	}
 	
 	/**
 	 * Takes in user input and if valid performs the correct function.
 	 */
-	private void takeOptionsInput() {
+	private boolean takeOptionsInput() {
+		String temp;
+		Integer uOption = -1;
+		boolean corrInput = false;
 		
+		while(!corrInput) {
+			temp = in.nextLine();
+			try {
+				uOption = Integer.parseInt(temp);
+				corrInput = true;
+			} catch (NumberFormatException exception){
+				picView.displayText("Please enter a number\n");
+				return false;
+			}
+		}
+		
+		switch(uOption) {
+		case 1:
+			if(picModel.isCorrect()) {
+				picView.displayVictory();
+				return true;
+			}else {
+				picView.displayIncorrect();
+			}
+			break;
+		case 2:
+			picView.displayInputData();
+			takeAndSetCoordinates();
+			break;
+		case 3:
+			return true;
+		default:
+			picView.displayText("Please enter a valid number");
+		}
+		
+		return false;
 	}
 	
 	/**

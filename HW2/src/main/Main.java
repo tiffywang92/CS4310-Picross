@@ -25,13 +25,14 @@ public class Main {
 			
 			switch(answer) {
 			case '1':
-				runPicross();
+				runPicross(in);
 				break;
 			case '2':
 				runConn4();
 				break;
 			case '3':
 				quitGame = true;
+				in.close();
 				System.out.println("Thanks for playing");
 				break;
 			default:
@@ -40,23 +41,22 @@ public class Main {
 		}
 	}
 	
-	static void runPicross() {
-		//PicrossModel picModel = new PicrossModel(howLarge());
+	static void runPicross(Scanner in) {
+		//PicrossModel picModel = new PicrossModel(howLarge(in));
 		//PicrossView picView = new PicrossView(picModel);
-		//PicrossController picCon = new PicrossController(picModel, picView);
+		//PicrossController picCon = new PicrossController(picModel, picView, in);
 	}
 	
 	static void runConn4() {
-		Conn4Model conModel = new Conn4Model(howLarge());
+		Conn4Model conModel = new Conn4Model(howLarge(in));
 		Conn4View conView = new Conn4View(conModel);
 		Conn4Controller conCon = new Conn4Controller(conModel, conView);
 	}
 	
-	static int howLarge() {
+	static int howLarge(Scanner in) {
 		String temp;
 		int toReturn = 0;
 		boolean corrInput = false;
-		Scanner in = new Scanner(System.in);
 		
 		while(!corrInput) {
 			System.out.print("How large should grid be:  ");

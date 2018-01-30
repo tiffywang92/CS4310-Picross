@@ -1,6 +1,5 @@
 package main;
 
-import static PicrossModel.java;
 
 /**
  * The View component defines and manages how the data is presented to the user.
@@ -26,39 +25,55 @@ public class PicrossView {
 		System.out.println("***Game Board***");
 
 		//Print out column hints 
-		for(int x = picModel.getUserGrid().getSize(); x > 0; x--) {
-		    System.out.print((x+1) + ") ");
-		    if(picModel.getHints(1)[x][1] == 0) {
-			System.out.println(picModel.getHints(1)[x][0]);
-		    }else {
-			System.out.println(picModel.getHints(1)[x][0] + ", " + picModel.getHints(1)[x][1]);
+		int last = 0;
+		for(int x = 0; x < picModel.getModelSize(); ++x) {
+		    System.out.print((x) + ") ");
+		    for(Integer toPrint : picModel.getHints(0).get(x)) {
+//		    	if(last != picModel.getHints(0).get(x).size() - 1) {
+//		    		System.out.print(toPrint + ", ");
+//		    		++last;
+//		    	} else {
+//		    		System.out.println(toPrint);
+//		    		last = 0;
+//		    	}
+		    	System.out.print(toPrint + ", ");
 		    }
+		    System.out.println();
 		}
+		
 		System.out.println();
 		System.out.print("  ");
 		for(int x = 0; x < picModel.getUserGrid().getSize(); x++) {
 		    System.out.print(" " + x + " ");
 		}
-		char[] letters = {'A', 'B', 'C', 'D'};
+		char[] letters = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'};
 
 		//Print out the rest
 		System.out.println();
-		for(int x = 0; x < picModel.getUserGrid().getSize(); x++) {
+		for(int x = 0; x < picModel.getModelSize(); x++) {
 		    System.out.print(letters[x] + " ");
-		    for(int y = 0; y < picModel.getUserGrid().getSize(); y++) {
-			System.out.print(" ");
-			if(picModel.getUserGrid()[x][y]) {
-			    System.out.print("0");
-			} else {
-			    System.out.print("-");
-			}
-			System.out.print(" ");
+		    for(int y = 0; y < picModel.getModelSize(); y++) {
+		    	System.out.print(" ");
+		    	if(picModel.getSquareUserBoard(x, y) == 'o') {
+		    		System.out.print("o");
+		    	} else {
+		    		System.out.print("-");
+		    	}
+		    	System.out.print(" ");
 		    }
-		    if(picModel.getHints(0)[x][1] == 0) {
-			System.out.println("\t=> " + picModel.getHints(0)[x][0]);
-		    }else {
-			System.out.println("\t=> " + picModel.getHints(0)[x][0] + ", " + picModel.getHints(0)[x][1]);
+		    System.out.print( "\t" + letters[x] + ") ");
+		    for(Integer toPrint : picModel.getHints(1).get(x)) {
+//		    	if(last != picModel.getHints(1).get(x).size() - 1) {
+//		    		System.out.print(toPrint + ", ");
+//		    		++last;
+//		    	} else {
+//		    		System.out.println(toPrint);
+//		    		last = 0;
+//		    	}
+		    	System.out.print(toPrint + ", ");
 		    }
+		    System.out.println();
+		    
 		}
 	}
 	
@@ -69,21 +84,21 @@ public class PicrossView {
 		System.out.println();
 		System.out.println("***Solution***");
 		System.out.print("  ");
-		for(int x = 0; x < picModel.getUserGrid().getSize(); x++) {
+		for(int x = 0; x < picModel.getModelSize(); x++) {
 		    System.out.print(" " + x + " ");
 		}
 		System.out.println();
-		char[] letters = {'A', 'B', 'C', 'D'};
-		for(int x = 0; x < picModel.getUserGrid().getSize(); x++) {
+		char[] letters = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'};
+		for(int x = 0; x < picModel.getModelSize(); x++) {
 		    System.out.print(letters[x] + " ");
-		    for(int y = 0; y < picModel.getUserGrid().getSize(); y++) {
-			System.out.print(" ");
-			if(picModel.getSolution()[x][y]) {
-			    System.out.print("0");
-			} else {
-			    System.out.print("-");
-			}
-			System.out.print(" ");
+		    for(int y = 0; y < picModel.getModelSize(); y++) {
+		    	System.out.print(" ");
+		    	if(picModel.getSquareSolBoard(x, y) == 'o') {
+		    		System.out.print("o");
+		    	} else {
+		    		System.out.print("-");
+		    	}
+		    	System.out.print(" ");
 		    }
 		    System.out.println();
 		}
@@ -94,24 +109,21 @@ public class PicrossView {
 	 * Check if correct, input data, give up
 	 */
 	public void displayOptions() {
-		System.out.println("Menu");
-		System.out.println();
+		System.out.println("\n***Menu***");
 		System.out.println("What would you like to do?");
-		System.out.println("1. Check solution");
+		System.out.println("1. Check your answer");
 		System.out.println("2. Input grid coordinates");
-		System.out.println("3. End game");
-		System.out.println();
+		System.out.println("3. Give up");
+		System.out.println("4. Quit");
 		System.out.print("Enter your choice: ");
-		// Follow with getting user input
-		takeOptionsInput();
 	}
 	
 	/**
 	 * Prints out how to input coordinates.
 	 */
 	public void displayInputData() {
-		System.out.println("Enter your answer with o or x; o as filled and x as not.");
-		System.out.println("Separate by space, but leave out spaces at end of line for best results.");
+		System.out.println("\nTo enter coordinates please write the row letter followed directly after by the column number. Example : A1");
+		System.out.print("Coordinates : ");
 	}
 
 	/**
@@ -126,14 +138,15 @@ public class PicrossView {
 	 */
 	public void displayGiveUp() {
 		// DISHONOR! Dishonor on you, dishonor on your family, dishonor on your cow...
-		System.out.println("Sorry, you lose! Play again? (Press q to quit)");
+		renderSolution();
+		System.out.println("Sorry, you lose!");
 	}
 	
 	/**
 	 * Tells the player their guess was incorrect and encourages them to keep trying
 	 */
 	public void displayIncorrect() {
-		System.out.println("Your solution is incorrect. Try again? (Press q to quit)");
+		System.out.println("\nYour solution is incorrect, but you are getting close.");
 	}
 	
 	/**

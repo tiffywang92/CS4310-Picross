@@ -32,6 +32,8 @@ public class PicrossController {
 		picView.displayText("Welcome to Picross");
 		boolean endGame = false;
 		while(!endGame) {
+			picView.displayText("Press Enter To Continue");
+			in.nextLine();
 			picView.renderPlayBoard();
 			picView.displayOptions();
 			endGame = takeOptionsInput();
@@ -73,6 +75,9 @@ public class PicrossController {
 			takeAndSetCoordinates();
 			break;
 		case 3:
+			picView.displayGiveUp();
+			return true;
+		case 4:
 			return true;
 		default:
 			picView.displayText("Please enter a valid number");
@@ -85,7 +90,44 @@ public class PicrossController {
 	 * Takes in coordinates from the user and updates the model.
 	 */
 	private void takeAndSetCoordinates() {
+		boolean badInput = false;
+		char tempC = ' ';
+		char tempN = ' ';
+		String tempS = in.nextLine();
+		tempC = tempS.charAt(0);
+		tempN = tempS.charAt(1);
 		
+		if(Character.isAlphabetic(tempC)) {
+			tempC = Character.toUpperCase(tempC);
+			if(Character.isDigit(tempN)) {
+				int colVal = Integer.parseInt(tempN + "");
+				int rowVal = turnToNumber(tempC);
+				if(colVal >= picModel.getModelSize() || rowVal == -1 || rowVal >= picModel.getModelSize()) {
+					badInput = true;
+				}else {
+					picModel.setSquareUserBoard(rowVal, colVal, 'o');
+				}
+			}else {
+				badInput = true;
+			}
+		}else {
+			badInput = true;
+		}
+		
+		if(badInput) {
+			picView.displayText("Incorrect Input");
+		}
+		
+	}
+	
+	private int turnToNumber(char toTurn) {
+		char[] letters = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'};
+		for(int x = 0; x < 10; ++x) {
+			if(toTurn == letters[x]) {
+				return x;
+			}
+		}
+		return -1;
 	}
 
 }

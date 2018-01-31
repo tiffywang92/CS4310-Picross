@@ -11,3 +11,9 @@ Project 2: Board Game Expansion: Connect 4
 due 1/29/18
 
 assignment instructions @ https://bb.csueastbay.edu/bbcswebdav/pid-3679924-dt-content-rid-37527684_1/courses/20181_CS_4310_01_1/Hw2.htm
+
+
+Project 3: Reminders App
+due 2/14/18
+
+assignment instructions @ https://bb.csueastbay.edu/bbcswebdav/pid-3695583-dt-content-rid-38521951_1/courses/20181_CS_4310_01_1/Hw3.htm

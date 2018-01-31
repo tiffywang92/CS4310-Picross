@@ -42,9 +42,9 @@ public class Main {
 	}
 	
 	static void runPicross(Scanner in) {
-		//PicrossModel picModel = new PicrossModel(howLarge(in));
-		//PicrossView picView = new PicrossView(picModel);
-		//PicrossController picCon = new PicrossController(picModel, picView, in);
+		PicrossModel picModel = new PicrossModel(howLarge(in));
+		PicrossView picView = new PicrossView(picModel);
+		PicrossController picCon = new PicrossController(picModel, picView, in);
 	}
 	
 	static void runConn4() {

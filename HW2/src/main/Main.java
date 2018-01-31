@@ -28,7 +28,7 @@ public class Main {
 				runPicross(in);
 				break;
 			case '2':
-				runConn4();
+				runConn4(in);
 				break;
 			case '3':
 				quitGame = true;
@@ -47,7 +47,7 @@ public class Main {
 		PicrossController picCon = new PicrossController(picModel, picView, in);
 	}
 	
-	static void runConn4() {
+	static void runConn4(Scanner in) {
 		Conn4Model conModel = new Conn4Model(howLarge(in));
 		Conn4View conView = new Conn4View(conModel);
 		Conn4Controller conCon = new Conn4Controller(conModel, conView);

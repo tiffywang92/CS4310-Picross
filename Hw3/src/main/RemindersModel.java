@@ -41,14 +41,20 @@ public class RemindersModel {
 	
 	public void removeAppointment(Integer toRemove) {
 		//check size restraints to avoid seg fault
-		appointments.remove((int) toRemove);
-		
+		if (appointments.size <= 0)
+			return;	// list is empty, do nothing
+		appointments.remove((int) toRemove);	// does nothing for nonexistent entries
 	}
 	
 	public Appointment getAppointment(Integer toGet) {
 		//check size restraints to avoid seg fault
-		return appointments.get(toGet);
-		
+		if (appointments.size <= 0)
+			return null;	// list is empty
+		try {
+			return appointments.get(toGet);
+		} catch (IndexOutOfBoundsException e) {
+			e.printStackTrace();	// print error message
+		}
 	}
 	
 	/**

@@ -59,6 +59,9 @@ public class RemindersModel {
 		//update time, check if list empty, check if appointment at 0 is due/past due (put in isDue for code cleanliness), 
 		//if so return it, otherwise or if list is empty return null
 		updateTime();
+		if (appointments.size > 0 && isDue) {
+			return appointments[0];
+		}
 		return null;
 	}
 	
@@ -70,7 +73,16 @@ public class RemindersModel {
 	 */
 	private boolean isDue() {
 		if(!isEmpty()) {
-			
+			if (appointments[0].year < year)
+				return true;
+			if (appointments[0].month < month)
+				return true;
+			if (appointments[0].day < day)
+				return true;
+			if (appointments[0].hour < hour)
+				return true;
+			if (appointments[0].day < day)
+				return true;
 		}
 		return false;
 	}

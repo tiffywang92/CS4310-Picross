@@ -23,38 +23,100 @@ public class RemindersView {
 	 * @return - appointment containing the inputed data
 	 */
 	public Appointment createAppointment() {
-		Integer year, month, day, hour, minute;
+		char save = 'n';
+		int year, month, day, hour, minute, reminder = 0;
 		String title, description;
-		//question user and store answers in variables
-		Appointment newAppoint = new Appointment(year, month, day, hour, minute, title, description);
+		Appointment newAppoint;
+		do {
+			Scanner sc = new Scanner (System.in);
+			System.out.print ("Please enter Title of your Appt : ");
+			title = sc.nextLine();
+			System.out.print ("Please enter description of your Appt : ");
+			description = sc.nextLine();
+			System.out.print ("Please enter the month of your Appt: ");
+			month = sc.nextInt();
+			System.out.print ("Please enter the day of your Appt: ");
+			day = sc.nextInt();
+			System.out.print ("Please enter the year of your Appt: ");
+			year = sc.nextInt();
+			System.out.print ("Please enter the hour of your Appt: ");
+			hour = sc.nextInt();
+			System.out.print ("Please enter the minute of your Appt: ");
+			minute = sc.nextInt();
+			System.out.print ("Please enter the Reminder Alarm in minute: ");
+			reminder = sc.nextInt();
+			System.out.println();
+			System.out.println("Please confirm the Appt Below ");
+			newAppoint = new Appointment(year, month, day, hour, minute, reminder, title, description);
+			displayAppointment(newAppoint);
+			System.out.println();
+			System.out.println("Save ? (y/n)");
+			save = sc.nextLine().charAt(0);
+		}while (save !='y');		
 		return newAppoint;
 	}
 	
 	/**
 	 * Displays options and takes in input, returns an integer corresponding to the option below
-	 * 1) create new Appointment
-	 * 2) Scroll through appointment
-	 * 3) quit
-	 * Extra to implement if time Find, Load/Save
 	 * @return - the number corresponding to the user choice
 	 */
 	public Integer mainMenu() {
-		return null;
+		int input = 0;
+		do {
+			System.out.println ();
+			System.out.println ("1) create new Appointment");
+			System.out.println ("2) Scroll through appointment");
+			System.out.println ("3) quit");
+			System.out.print ("Please choose an options (1-3): ");
+			System.out.println();
+			try{
+				Scanner sc = new Scanner (System.in);
+				input = sc.nextInt();
+				if (input != 1 && input !=2 && input !=3 ) { 
+					System.out.println ("Invalid input, please enter 1, 2 or 3");	
+				}
+			}
+			catch(Exception e) {
+					System.out.println ("Invalid input, please enter 1, 2 or 3");	
+				}
+			System.out.println ();
+		}while (input != 1 && input !=2 && input !=3 );
+	return input;
 	}
 	
 	/**
 	 * Displays Appointment ID, then the Appointment information, then the menu choices below
-	 * 1) forward
-	 * 2) back
-	 * 3) delete
-	 * 4) Implement if time - editing
 	 * @param toDisp - the index of appointment to display
 	 * @return - the number corresponding to the user choice
 	 */
+	
 	public Integer scrollMenu(Integer toDisp) {
-		return null;
-		
+		System.out.println ("Appt ID: " + toDisp);
+		displayAppointment(remModel.getAppointment(toDisp));
+		int input = 0;
+		do {
+			System.out.println ();
+			System.out.println ("1) forward");
+			System.out.println ("2) back");
+			System.out.println ("3) delete");
+			System.out.print ("Please choose an options (1-3): ");
+			System.out.println();
+			try{
+				Scanner sc = new Scanner (System.in);
+				input = sc.nextInt();
+				if (input != 1 && input !=2 && input !=3 ) { 
+					System.out.println ("Invalid input, please enter 1, 2 or 3");	
+				}
+			}
+			catch(Exception e) {
+					System.out.println ("Invalid input, please enter 1, 2 or 3");	
+				}
+			System.out.println ();
+		}while (input != 1 && input !=2 && input !=3 );
+	return input;		
 	}
+	
+
 	
 	/**
 	 * Display string "Due Now" or something, then the Appointment information
@@ -64,5 +126,16 @@ public class RemindersView {
 	 */
 	public void displayAppointmentDue(Integer toDisp) {
 		
+	}
+	
+	/**
+	 * Display appointment info 
+	 * 
+	 */
+	public void displayAppointment (Appointment appt) {
+		System.out.println("Subject : " + appt.getTitle());
+		System.out.println("Description : "+ appt.getDescription());
+		System.out.println("Date / Time : "+ appt.getMonth() + "/" + appt.getDay() +"/" + appt.getYear() + "  " + appt.getHour() + ":" + appt.getMinute());
+		System.out.println("Reminder Alarm : " +appt.getReminder());
 	}
 }

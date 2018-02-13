@@ -6,8 +6,12 @@ package main;
  */
 public class Appointment {
 
-	private Integer year, month, day, hour, minute;
+	private Integer year, month, day, hour, minute, reminder;
 	private String title, description;
+	
+	public Integer getReminder() {
+		return reminder;
+	}
 	
 	public Integer getYear() {
 		return year;
@@ -37,7 +41,7 @@ public class Appointment {
 		return description;
 	}
 
-	Appointment(Integer year, Integer month, Integer day, Integer hour, Integer minute, String title, String description){
+	Appointment(Integer year, Integer month, Integer day, Integer hour, Integer minute, Integer reminder, String title, String description){
 		this.year = year;
 		this.month = month;
 		this.day = day;
@@ -45,6 +49,7 @@ public class Appointment {
 		this.minute = minute;
 		this.title = title;
 		this.description = description;
+		this.reminder = reminder;
 	}
 	
 	

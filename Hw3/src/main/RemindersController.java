@@ -61,6 +61,16 @@ public class RemindersController {
 			//loop goes in here
 			scrollPosition = remView.scrollMenu();
 			
+			switch (scrollPosition){
+			    
+			    case 0: 
+			            break;
+			    case 1:
+			            break;
+			    case 3: remModel.removeAppointment();
+			            break;
+			}    
+			
 		}
 		
 	}

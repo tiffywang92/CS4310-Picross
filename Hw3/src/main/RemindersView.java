@@ -2,6 +2,8 @@ package main;
 
 import java.util.Scanner;
 
+import javax.swing.JOptionPane;
+
 /**
  * The View component defines and manages how the data is presented to the user.
  * This project will contain an active view which takes in user input and
@@ -125,7 +127,7 @@ public class RemindersView {
 	 * @param toDisp - the index of Appointment to display
 	 */
 	public void displayAppointmentDue(Integer toDisp) {
-		
+		JOptionPane.showMessageDialog(null, remModel.getAppointment(toDisp).getTitle() + " is DUE! \n" );
 	}
 	
 	/**

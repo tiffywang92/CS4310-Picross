@@ -1,10 +1,3 @@
-package main;
-
-/**
- * The Controller component will run the app loop and take in the input received from the view.
- * It will make calls to the appropriate code in the View and the Model based off the input.
- *
- */
 public class RemindersController {
 	
 	private RemindersModel remModel;
@@ -22,8 +15,11 @@ public class RemindersController {
 			temp = remModel.dueNow();
 			if(temp != null) {
 				//display it with view.displayAppointmentDue, then remove it (remove index 0)
+				System.out.println(" This event is coming up" + remView.displayAppointmentDue());
+				remModel.removeAppointment(0);
 			}else {
 				//run main menu
+				runMainMenu();
 			}
 		}
 	}
@@ -34,6 +30,21 @@ public class RemindersController {
 	 * Extra to implement if time Find, Load/Save
 	 */
 	private void runMainMenu() {
+	       int temp = 0; 
+	       
+	       temp = remView.mainMenu(); 
+	       switch (temp) { 
+	           
+	           case 1: remModel.addAppointment(remView.createAppointment());
+	                    
+	                    break;
+	           case 2: runScrollMenu();
+	                    break;
+	           case 3:  quitApp();
+	                    break;
+	          default:  runMainMenu();
+	                    break;
+	       }
 		
 	}
 	
@@ -48,6 +59,8 @@ public class RemindersController {
 		Integer size = remModel.getSize();
 		if(size != 0) {
 			//loop goes in here
+			scrollPosition = remView.scrollMenu();
+			
 		}
 		
 	}

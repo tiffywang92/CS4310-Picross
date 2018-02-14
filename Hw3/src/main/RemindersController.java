@@ -57,17 +57,27 @@ public class RemindersController {
 	private void runScrollMenu() {
 		Integer scrollPosition = 0;
 		Integer size = remModel.getSize();
+		int temp = 0;
 		if(size != 0) {
 			//loop goes in here
-			scrollPosition = remView.scrollMenu();
+			temp = remView.scrollMenu();
 			
-			switch (scrollPosition){
+			switch (temp){
 			    
-			    case 0: 
+			    case 0: if(scrollPosition > 0){    
+			            remView.displayAppointment(remModel.getAppointment(scrollPosition - 1);
+			            scrollPosition -= 1;
+			            }
+			            
+			            else{
+			                remView.displayAppointment(remModel.getAppointment(remModel.getSize());
+			            }
+			                break;
+			    case 1: remView.displayAppointment(remModel.getAppointment(scrollPosition + 1);
+			            scrollPosition += 1;
 			            break;
-			    case 1:
-			            break;
-			    case 3: remModel.removeAppointment();
+			    case 3: remModel.removeAppointment(scrollPosition);
+			            size = remModel.getSize();
 			            break;
 			}    
 			

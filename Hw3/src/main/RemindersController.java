@@ -1,3 +1,6 @@
+package main;
+
+
 public class RemindersController {
 	
 	private RemindersModel remModel;
@@ -14,8 +17,7 @@ public class RemindersController {
 		while(true) {
 			temp = remModel.dueNow();
 			if(temp != null) {
-				//display it with view.displayAppointmentDue, then remove it (remove index 0)
-				System.out.println(" This event is coming up" + remView.displayAppointmentDue());
+				remView.displayAppointmentDue(0);
 				remModel.removeAppointment(0);
 			}else {
 				//run main menu
@@ -35,15 +37,18 @@ public class RemindersController {
 	       temp = remView.mainMenu(); 
 	       switch (temp) { 
 	           
-	           case 1: remModel.addAppointment(remView.createAppointment());
-	                    
-	                    break;
-	           case 2: runScrollMenu();
-	                    break;
-	           case 3:  quitApp();
-	                    break;
-	          default:  runMainMenu();
-	                    break;
+	           case 1: 
+	        	   remModel.addAppointment(remView.createAppointment());
+	        	   break;
+	           case 2: 
+	        	   runScrollMenu();
+	        	   break;
+	           case 3:  
+	        	   quitApp();
+	        	   break;
+	          default:  
+	        	  runMainMenu();
+	        	  break;
 	       }
 		
 	}
@@ -58,29 +63,33 @@ public class RemindersController {
 		Integer scrollPosition = 0;
 		Integer size = remModel.getSize();
 		int temp = 0;
-		if(size != 0) {
-			//loop goes in here
-			temp = remView.scrollMenu();
+		while(size != 0) {
+			temp = remView.scrollMenu(scrollPosition);
 			
 			switch (temp){
-			    
-			    case 0: if(scrollPosition > 0){    
-			            remView.displayAppointment(remModel.getAppointment(scrollPosition - 1);
-			            scrollPosition -= 1;
-			            }
-			            
-			            else{
-			                remView.displayAppointment(remModel.getAppointment(remModel.getSize());
-			            }
-			                break;
-			    case 1: remView.displayAppointment(remModel.getAppointment(scrollPosition + 1);
-			            scrollPosition += 1;
-			            break;
-			    case 3: remModel.removeAppointment(scrollPosition);
-			            size = remModel.getSize();
-			            break;
-			}    
-			
+			    case 1: 
+			    	scrollPosition += 1;
+			    	if(scrollPosition == size) {
+			    		scrollPosition = 0;
+			    	}
+			    	break;
+			    case 2:
+			    	--scrollPosition;
+			    	if(scrollPosition == -1) {
+			    		scrollPosition = size - 1;
+			    	}
+			    	break;
+			    case 3: 
+			    	remModel.removeAppointment(scrollPosition);
+			    	size = remModel.getSize();
+			    	if(scrollPosition == size) {
+			    		--scrollPosition;
+			    	}
+			    	break;
+			    case 4:
+			    	size = 0;
+			    	break;
+			}
 		}
 		
 	}

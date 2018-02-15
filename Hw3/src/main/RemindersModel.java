@@ -14,6 +14,10 @@ public class RemindersModel {
 	private ArrayList<Appointment> appointments;
 	private Integer year, month, day, hour, minute;
 	
+	public RemindersModel() {
+		appointments = new ArrayList<Appointment>();
+	}
+	
 	public boolean isEmpty() {
 		if(appointments.size() == 0) {
 			return true;
@@ -22,6 +26,10 @@ public class RemindersModel {
 		}
 	}
 	
+	/**
+	 * 
+	 * @return - How many appointments exist
+	 */
 	public Integer getSize() {
 		return appointments.size();
 	}
@@ -34,27 +42,51 @@ public class RemindersModel {
 	 * @param newAppoint - the appointment to add
 	 */
 	public void addAppointment(Appointment newAppoint) {
-		Integer position = null;
-		appointments.add(position, newAppoint);
+		if(appointments.size() == 0) {
+			appointments.add(newAppoint);
+			return;
+		}
+		Integer position = 0;
+		year = newAppoint.getYear();
+		month = newAppoint.getMonth();
+		day = newAppoint.getDay();
+		hour = newAppoint.getHour();
+		minute = newAppoint.getMinute();
+		
+		while(position != appointments.size()) {
+			if(isDue(position)) {
+				++position;
+			}else {
+				break;
+			}
+		}
+		
+		if(position == appointments.size()) {
+			appointments.add(newAppoint);
+		}else {
+			appointments.add(position, newAppoint);
+		}
 		
 	}
 	
 	public void removeAppointment(Integer toRemove) {
-		//check size restraints to avoid seg fault
-		if (appointments.size <= 0)
+		if (appointments.size() <= 0)
 			return;	// list is empty, do nothing
+		
+		if(toRemove < 0 || toRemove >= appointments.size())
+			return; // out of bounds, do nothing
+		
 		appointments.remove((int) toRemove);	// does nothing for nonexistent entries
 	}
 	
 	public Appointment getAppointment(Integer toGet) {
-		//check size restraints to avoid seg fault
-		if (appointments.size <= 0)
+		if (appointments.size() <= 0)
 			return null;	// list is empty
-		try {
-			return appointments.get(toGet);
-		} catch (IndexOutOfBoundsException e) {
-			e.printStackTrace();	// print error message
-		}
+		
+		if(toGet < 0 || toGet >= appointments.size())
+			return null;
+		
+		return appointments.get(toGet);
 	}
 	
 	/**
@@ -65,32 +97,56 @@ public class RemindersModel {
 		//update time, check if list empty, check if appointment at 0 is due/past due (put in isDue for code cleanliness), 
 		//if so return it, otherwise or if list is empty return null
 		updateTime();
-		if (appointments.size > 0 && isDue) {
-			return appointments[0];
+		if (appointments.size() > 0 && isDue()) {
+			return appointments.get(0);
 		}
 		return null;
 	}
 	
 	/**
-	 * Check the appointment at the starting position against the current time
+	 * Check the appointment at the position against the current time stored
 	 * can check in order year - month - day - hour - minute
 	 * can see if value in appointment is less than the current time (signifies a time in the past)
 	 * @return - true if appointment is due / past due, false if it is not yet due
 	 */
-	private boolean isDue() {
+	private boolean isDue(Integer toTest) {
 		if(!isEmpty()) {
-			if (appointments[0].year < year)
-				return true;
-			if (appointments[0].month < month)
-				return true;
-			if (appointments[0].day < day)
-				return true;
-			if (appointments[0].hour < hour)
-				return true;
-			if (appointments[0].day < day)
-				return true;
+			if(toTest >= 0 && toTest < appointments.size()) {
+				if (appointments.get(toTest).getYear() < year)
+					return true;
+				if(appointments.get(toTest).getYear() > year)
+					return false;
+				
+				if (appointments.get(toTest).getMonth() < month)
+					return true;
+				if (appointments.get(toTest).getMonth() > month)
+					return false;
+				
+				if (appointments.get(toTest).getDay() < day)
+					return true;
+				if (appointments.get(toTest).getDay() > day)
+					return false;
+				
+				if (appointments.get(toTest).getHour() < hour)
+					return true;
+				if (appointments.get(toTest).getHour() > hour)
+					return false;
+				
+				if (appointments.get(toTest).getMinute() < minute)
+					return true;
+				if (appointments.get(toTest).getMinute() > minute)
+					return false;
+			}
 		}
 		return false;
+	}
+	
+	/**
+	 * Check the appointment at the first position against the current time stored
+	 * @return - true if appointment is due / past due, false if it is not yet due
+	 */
+	private boolean isDue() {
+		return isDue(0);
 	}
 	
 	/**

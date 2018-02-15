@@ -30,36 +30,39 @@ public class RemindersView {
 		String title, description;
 		Appointment newAppoint;
 		do {
-			Scanner sc = new Scanner (System.in);
 			System.out.print ("Please enter Title of your Appt : ");
-			title = sc.nextLine();
+			title = in.nextLine();
 			System.out.print ("Please enter description of your Appt : ");
-			description = sc.nextLine();
+			description = in.nextLine();
 			System.out.print ("Please enter the month of your Appt: ");
-			month = sc.nextInt();
+			month = in.nextInt();
 			System.out.print ("Please enter the day of your Appt: ");
-			day = sc.nextInt();
+			day = in.nextInt();
 			System.out.print ("Please enter the year of your Appt: ");
-			year = sc.nextInt();
+			year = in.nextInt();
 			System.out.print ("Please enter the hour of your Appt: ");
-			hour = sc.nextInt();
+			hour = in.nextInt();
 			System.out.print ("Please enter the minute of your Appt: ");
-			minute = sc.nextInt();
+			minute = in.nextInt();
 			System.out.print ("Please enter the Reminder Alarm in minute: ");
-			reminder = sc.nextInt();
+			reminder = in.nextInt();
+			in.nextLine();
 			System.out.println();
 			System.out.println("Please confirm the Appt Below ");
 			newAppoint = new Appointment(year, month, day, hour, minute, reminder, title, description);
 			displayAppointment(newAppoint);
 			System.out.println();
 			System.out.println("Save ? (y/n)");
-			save = sc.nextLine().charAt(0);
+			save = in.nextLine().charAt(0);
 		}while (save !='y');		
 		return newAppoint;
 	}
 	
 	/**
 	 * Displays options and takes in input, returns an integer corresponding to the option below
+	 * 1 - create new Appointment
+	 * 2 - Scroll through appointments
+	 * 3 - quit
 	 * @return - the number corresponding to the user choice
 	 */
 	public Integer mainMenu() {
@@ -69,11 +72,11 @@ public class RemindersView {
 			System.out.println ("1) create new Appointment");
 			System.out.println ("2) Scroll through appointment");
 			System.out.println ("3) quit");
-			System.out.print ("Please choose an options (1-3): ");
+			System.out.print ("Please choose an option (1-3): ");
 			System.out.println();
 			try{
-				Scanner sc = new Scanner (System.in);
-				input = sc.nextInt();
+				input = in.nextInt();
+				in.nextLine();
 				if (input != 1 && input !=2 && input !=3 ) { 
 					System.out.println ("Invalid input, please enter 1, 2 or 3");	
 				}
@@ -88,6 +91,10 @@ public class RemindersView {
 	
 	/**
 	 * Displays Appointment ID, then the Appointment information, then the menu choices below
+	 * 1 - forward
+	 * 2 - back
+	 * 3 - delete
+	 * 4 - quit
 	 * @param toDisp - the index of appointment to display
 	 * @return - the number corresponding to the user choice
 	 */
@@ -101,12 +108,13 @@ public class RemindersView {
 			System.out.println ("1) forward");
 			System.out.println ("2) back");
 			System.out.println ("3) delete");
-			System.out.print ("Please choose an options (1-3): ");
+			System.out.println ("4) quit");
+			System.out.print ("Please choose an options (1-4): ");
 			System.out.println();
 			try{
 				Scanner sc = new Scanner (System.in);
 				input = sc.nextInt();
-				if (input != 1 && input !=2 && input !=3 ) { 
+				if (input != 1 && input !=2 && input !=3 && input != 4) { 
 					System.out.println ("Invalid input, please enter 1, 2 or 3");	
 				}
 			}
@@ -114,7 +122,7 @@ public class RemindersView {
 					System.out.println ("Invalid input, please enter 1, 2 or 3");	
 				}
 			System.out.println ();
-		}while (input != 1 && input !=2 && input !=3 );
+		}while (input != 1 && input !=2 && input !=3 && input != 4);
 	return input;		
 	}
 	
@@ -127,7 +135,11 @@ public class RemindersView {
 	 * @param toDisp - the index of Appointment to display
 	 */
 	public void displayAppointmentDue(Integer toDisp) {
-		JOptionPane.showMessageDialog(null, remModel.getAppointment(toDisp).getTitle() + " is DUE! \n" );
+		String temp = remModel.getAppointment(toDisp).getTitle() + " is DUE! \n" +  "Description : " + remModel.getAppointment(toDisp).getDescription();
+		System.out.println(temp);
+		System.out.print("Press enter to continue");
+		in.nextLine();
+		//JOptionPane.showMessageDialog(null, remModel.getAppointment(toDisp).getTitle() + " is DUE! \n" +  "\n\nDescription : " + remModel.getAppointment(toDisp).getDescription());
 	}
 	
 	/**

@@ -17,3 +17,9 @@ Project 3: Reminders App
 due 2/14/18
 
 assignment instructions @ https://bb.csueastbay.edu/bbcswebdav/pid-3695583-dt-content-rid-38521951_1/courses/20181_CS_4310_01_1/Hw3.htm
+
+
+Project 4: Reminder App Library: Text Editor Swing App
+due 2/28/18
+
+assignment instructions @ https://bb.csueastbay.edu/bbcswebdav/pid-3885461-dt-content-rid-42451211_1/courses/20181_CS_4310_01_1/Hw4.htm

@@ -1,0 +1,46 @@
+import java.io;
+
+public class Test {
+    public static void readFile(String fileName) {
+
+        
+        String line = null;
+
+        try {
+           
+            FileReader fileReader = new FileReader(fileName);
+
+            
+            BufferedReader bufferedReader = new BufferedReader(fileReader);
+
+            while((line = bufferedReader.readLine()) != null) {
+                System.out.println(line);
+            }   
+
+            
+            bufferedReader.close();         
+        }
+        catch(FileNotFoundException ex) {
+            System.out.println(
+                "Unable to open file '" + 
+                fileName + "'");                
+        }
+        catch(IOException ex) {
+            System.out.println(
+                "Error reading file '" 
+                + fileName + "'");                  
+            
+            
+        }
+    }
+    
+    public static void createFile(){
+        String fileName = '';
+        System.out.println("name your file: ");
+        Scanner scanner = new Scanner(System.in);
+        String fileName = scanner.nextLine();
+        
+        PrintWriter writer = new PrintWriter(fileName, "UTF-8");
+        writer.close();
+    }
+}

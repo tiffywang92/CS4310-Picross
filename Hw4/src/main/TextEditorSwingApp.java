@@ -1,9 +1,10 @@
 package main;
 
 import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import javax.swing.JTextArea;
 import javax.swing.JScrollPane;
@@ -11,6 +12,8 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.FileNotFoundException;
+import java.io.UnsupportedEncodingException;
 
 public class TextEditorSwingApp {
 
@@ -46,6 +49,8 @@ public class TextEditorSwingApp {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+		
+		readWrite rw = new readWrite();		
 		frame = new JFrame();
 		frame.setBounds(100, 100, 850, 850);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -72,6 +77,17 @@ public class TextEditorSwingApp {
 		btnSave.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
+				try {
+					rw.createFile(saveField.getText(), textArea.getText());
+				} catch (FileNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (UnsupportedEncodingException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				JOptionPane.showMessageDialog(null, saveField.getText() + " file saved successfully.");
+				saveField.setText("");
 				System.out.println(saveField.getText());
 				System.out.println(textArea.getText());
 				textArea.setText("");
@@ -97,6 +113,10 @@ public class TextEditorSwingApp {
 		btnLoad.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				String text = rw.readFile(loadField.getText());
+				textArea.setText(text);
+				JOptionPane.showMessageDialog(null, loadField.getText() + " file loaded successfully.");
+				loadField.setText("");
 				System.out.println(loadField.getText());
 			}
 		});

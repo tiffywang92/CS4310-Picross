@@ -9,11 +9,16 @@ import java.awt.Font;
 import javax.swing.JTextArea;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
+
 import javax.swing.JButton;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.FileNotFoundException;
 import java.io.UnsupportedEncodingException;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+
+import preJar.RemindersView;
 
 public class TextEditorSwingApp {
 
@@ -21,6 +26,7 @@ public class TextEditorSwingApp {
 	private JTextField saveField;
 	private JTextArea textArea;
 	private JTextField loadField;
+	private static RemindersView remView;
 
 	/**
 	 * Launch the application.
@@ -31,6 +37,9 @@ public class TextEditorSwingApp {
 				try {
 					TextEditorSwingApp window = new TextEditorSwingApp();
 					window.frame.setVisible(true);
+					remView = new RemindersView();
+					remView.createReminder(1, "Save Reminder", "Designed to help remind Users to save so they don't yell at us");
+
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -66,6 +75,16 @@ public class TextEditorSwingApp {
 		frame.getContentPane().add(scrollPane);
 		
 		textArea = new JTextArea();
+		textArea.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent arg0) {
+				Boolean isItTime = remView.isDue();
+				if(isItTime) {
+					JOptionPane.showMessageDialog(null, " It's been a while since you last saved.\nSave now or lose your work forever!");
+					remView.createReminder(1, "Save Reminder", "Designed to help remind Users to save so they don't yell at us");
+				}
+			}
+		});
 		scrollPane.setViewportView(textArea);
 		
 		saveField = new JTextField();
@@ -80,10 +99,10 @@ public class TextEditorSwingApp {
 				try {
 					rw.createFile(saveField.getText(), textArea.getText());
 				} catch (FileNotFoundException e) {
-					// TODO Auto-generated catch block
+					
 					e.printStackTrace();
 				} catch (UnsupportedEncodingException e) {
-					// TODO Auto-generated catch block
+					
 					e.printStackTrace();
 				}
 				JOptionPane.showMessageDialog(null, saveField.getText() + " file saved successfully.");

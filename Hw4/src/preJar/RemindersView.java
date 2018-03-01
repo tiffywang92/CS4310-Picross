@@ -12,21 +12,39 @@ import javax.swing.JOptionPane;
  */
 public class RemindersView {
 	
+	// Class variables
 	private RemindersController remControl;
 
-	RemindersView(){
+	/* Class constructor:
+	 * Initializes app controller via the RemindersController class
+	 */
+	public RemindersView(){
 		RemindersController newControl = new RemindersController();
 		remControl = newControl;
 	}
 	
+	/* Method: createReminder (1)
+	 * Creates a new instance of the Appointment class, initializes Appointment with user-specified values (date, time, title & description),
+	 * and saves all to Control
+	 */
 	public void createReminder(Integer year, Integer month, Integer day, Integer hour, Integer minute, String title, String description) {
+		Appointment newAppoint = new Appointment(year, month, day, hour, minute, title, description);
+		remControl.addReminder(newAppoint);
 		
 	}
 	
+	/* Method: createReminder (2)
+	 * Creates a new instance of the Appointment class, initializes Appointment with default values, except for specified time, title & description, 
+	 * and saves all to Control
+	 */
 	public void createReminder(Integer minute, String title, String description) {
-		
+		LocalDateTime curTime = LocalDateTime.now();
+		createReminder(curTime.getYear(), curTime.getMonth().getValue(), curTime.getDayOfMonth(), curTime.getHour(), curTime.getMinute() + minute, title, description);
 	}
 	
+	/* Method: isDue
+	 * Checks if an Appointment is due by calling the Controller's checking method
+	 */
 	public boolean isDue() {
 		return false;
 	}

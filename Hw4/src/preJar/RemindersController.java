@@ -4,19 +4,30 @@ import java.util.Scanner;
 
 public class RemindersController {
 	
+	// Class variables
 	private RemindersModel remModel;
 	private RemindersView remView;
 	
 	
+	/* Class constructor:
+	 * Initializes app model via the RemindersModel class
+	 */
 	RemindersController(){
 		RemindersModel newModel = new RemindersModel();
 		remModel = newModel;
 	}
 	
+	/* Method: addReminder
+	 * Creates a new instance of the Appointment class with passed-in parameter values and saves to Model
+	 */
 	public void addReminder(Appointment newAppoint) {
-		
+		remModel.addAppointment(newAppoint);
 	}
 	
+	/* Method: checkIfTimeUp
+	 * Checks the current Model for Appointments that are due and removes them if true
+	 * Else, does nothing and returns false
+	 */
 	public boolean checkIfTimeUp() {
 		return false;
 	}
